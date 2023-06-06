@@ -15,6 +15,7 @@ export const CrowdFundingContext = React.createContext();
 export const CrowdFundingProvider = ({ children }) => {
 	const titleData = "Crowd funding contract";
 	const [currentAccount, setCurrentAccount] = useState("");
+	const [error, setError] = useState("");
 
 	const createCampaign = async (campaign) => {
 		const { title, description, amount, deadline } = campaign;
@@ -130,8 +131,7 @@ export const CrowdFundingProvider = ({ children }) => {
 	// Check wallet is connected or not
 	const checkIfWalletConnected = async () => {
 		try {
-			if (!window.ethereum)
-				return setOpenError(true), setError("Install MetaMask");
+			if (!window.ethereum) return setError("Install MetaMask");
 
 			const accounts = await window.ethereum.request({
 				method: "eth_accounts",
@@ -154,7 +154,7 @@ export const CrowdFundingProvider = ({ children }) => {
 	// connect wallet
 	const connectWallet = async () => {
 		try {
-			if (!window.ethereum) return setError("Install MetaMask");
+			if (!window.ethereum) return console.log("Install MetaMask");
 
 			const accounts = await window.ethereum.request({
 				method: "eth_requestAccounts",
