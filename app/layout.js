@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { Navbar, Footer, Logo, Menu } from "@/Components";
+import { Navbar, Footer } from "../Components/index";
+import { CrowdFundingProvider } from "../Context/CrowdFunding";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,11 +14,11 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				{/* <Logo />
-				<Menu /> */}
-				<Navbar />
-				{children}
-				<Footer />
+				<CrowdFundingProvider>
+					<Navbar />
+					{children}
+					<Footer />
+				</CrowdFundingProvider>
 			</body>
 		</html>
 	);
