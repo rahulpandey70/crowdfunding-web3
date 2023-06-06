@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
-import web3modal from "web3modal";
-import { ethers } from "ethers";
+"use client";
 
-import { CrowdFundingABI, CrowdFundingAddress } from "./contants";
+import React, { useState, useEffect } from "react";
+const { web3modal } = require("web3modal");
+const { ethers } = require("ethers");
+
+import { CrowdFundingABI, CrowdFundingAddress } from "../Context/contants";
 
 const fetchContract = (signerOrProvider) => {
 	new ethers.Contract(CrowdFundingABI, CrowdFundingAddress, signerOrProvider);
@@ -141,7 +143,7 @@ export const CrowdFundingProvider = ({ children }) => {
 				console.log("No account found");
 			}
 		} catch (error) {
-			console.log("Somthing went wrong while connection to wallet", error);
+			console.log("Somthing went wrong while connection to wallet");
 		}
 	};
 
@@ -165,7 +167,7 @@ export const CrowdFundingProvider = ({ children }) => {
 	};
 
 	return (
-		<CrowdFundingProvider.Provider
+		<CrowdFundingContext.Provider
 			value={{
 				titleData,
 				currentAccount,
@@ -178,6 +180,6 @@ export const CrowdFundingProvider = ({ children }) => {
 			}}
 		>
 			{children}
-		</CrowdFundingProvider.Provider>
+		</CrowdFundingContext.Provider>
 	);
 };
