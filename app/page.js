@@ -45,7 +45,7 @@ export default function Home() {
 			/>
 
 			<Card
-				title="Your Created Campaign"
+				title="Your Campaign"
 				allCampaign={userCampaign}
 				setOpenModel={setOpenModel}
 				setDonate={setDonateCampaign}
