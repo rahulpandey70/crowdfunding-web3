@@ -1,13 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-const { web3modal } = require("web3modal");
-const { ethers } = require("ethers");
+import Web3modal from "web3modal";
+import { ethers } from "ethers";
 
 import { CrowdFundingABI, CrowdFundingAddress } from "../Context/contants";
 
 const fetchContract = (signerOrProvider) => {
-	new ethers.Contract(CrowdFundingABI, CrowdFundingAddress, signerOrProvider);
+	return new ethers.Contract(
+		CrowdFundingAddress,
+		CrowdFundingABI,
+		signerOrProvider
+	);
 };
 
 export const CrowdFundingContext = React.createContext();
@@ -19,7 +23,7 @@ export const CrowdFundingProvider = ({ children }) => {
 
 	const createCampaign = async (campaign) => {
 		const { title, description, amount, deadline } = campaign;
-		const web3modal = new web3modal();
+		const web3modal = new Web3modal();
 		const connection = await web3modal.connect();
 		const provider = new ethers.providers.Web3Provider(connection);
 		const signer = provider.getSigner();
@@ -45,6 +49,8 @@ export const CrowdFundingProvider = ({ children }) => {
 	const getCampaigns = async () => {
 		const provider = new ethers.providers.JsonRpcProvider();
 		const contract = fetchContract(provider);
+
+		console.log(contract);
 
 		const campaigns = await contract.getCampaign();
 
@@ -94,9 +100,9 @@ export const CrowdFundingProvider = ({ children }) => {
 	};
 
 	const donate = async (pId, amount) => {
-		const web3modal = new web3modal();
+		const web3modal = new Web3modal();
 		const connection = await web3modal.connect();
-		const provider = new ethers.providers.web3modal(connection);
+		const provider = new ethers.providers.Web3modal(connection);
 		const signer = provider.getSigner();
 		const contract = fetchContract(signer);
 
