@@ -30,7 +30,6 @@ export const CrowdFundingProvider = ({ children }) => {
 
 		const contract = fetchContract(signer);
 
-		console.log(currentAccount);
 		try {
 			const transaction = await contract.createCampaign(
 				currentAccount,
@@ -40,7 +39,6 @@ export const CrowdFundingProvider = ({ children }) => {
 				new Date(deadline).getTime()
 			);
 			await transaction.wait();
-			console.log(transaction);
 		} catch (error) {
 			console.log(error);
 		}
@@ -49,8 +47,6 @@ export const CrowdFundingProvider = ({ children }) => {
 	const getCampaigns = async () => {
 		const provider = new ethers.providers.JsonRpcProvider();
 		const contract = fetchContract(provider);
-
-		console.log(contract);
 
 		const campaigns = await contract.getCampaign();
 
@@ -102,7 +98,7 @@ export const CrowdFundingProvider = ({ children }) => {
 	const donate = async (pId, amount) => {
 		const web3modal = new Web3modal();
 		const connection = await web3modal.connect();
-		const provider = new ethers.providers.Web3modal(connection);
+		const provider = new ethers.providers.Web3Provider(connection);
 		const signer = provider.getSigner();
 		const contract = fetchContract(signer);
 
