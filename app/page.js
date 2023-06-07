@@ -15,6 +15,9 @@ export default function Home() {
 		getDonations,
 	} = useContext(CrowdFundingContext);
 
+	console.log(getCampaigns);
+	// console.log(getUserCampaigns);
+
 	const [allCampaign, setAllCampaign] = useState();
 	const [userCampaign, setUserCampaign] = useState();
 	const [openModel, setOpenModel] = useState(false);
@@ -30,8 +33,6 @@ export default function Home() {
 			setUserCampaign(userData);
 		};
 	}, []);
-
-	console.log(donateCampaign);
 
 	return (
 		<>
