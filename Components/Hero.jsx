@@ -12,7 +12,7 @@ const Hero = ({ titleData, createCampaign }) => {
 	const createNewCampaign = async (e) => {
 		e.preventDefault();
 		try {
-			return await createCampaign(campaign);
+			const data = await createCampaign(campaign);
 		} catch (error) {
 			console.log(error);
 		}

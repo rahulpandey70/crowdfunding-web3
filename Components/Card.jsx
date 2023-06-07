@@ -1,8 +1,6 @@
 import React from "react";
 
 const Card = ({ title, allCampaign, setOpenModel, setDonate }) => {
-	console.log(allCampaign);
-
 	const daysLeft = (deadline) => {
 		const diff = new Date(deadline).getTime() - Date.now();
 		const remainingDay = diff / (1000 * 3600 * 24);
@@ -27,7 +25,7 @@ const Card = ({ title, allCampaign, setOpenModel, setDonate }) => {
 
 						<div className="py-5 pl-2">
 							<p className="mb-2 text-xs font-semibold text-gray-600 uppercase">
-								Day Left: {daysLeft(campaign.deadline)}
+								Days Left: {daysLeft(campaign.deadline)}
 							</p>
 							<a
 								href="/"
